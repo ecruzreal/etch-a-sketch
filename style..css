@@ -28,3 +28,8 @@ body{
 .buttons{
     padding: 16px;
 }
+
+#grid-update{
+    padding: 8px;
+    margin: 16px;
+}
