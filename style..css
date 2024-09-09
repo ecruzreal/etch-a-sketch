@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin: 0;
+}
+
+.box{
+    flex-grow: 1;
+    border: 1px solid black;
+    margin: 0;
+    padding: 0px;
+}
