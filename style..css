@@ -4,6 +4,7 @@
 
 body{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -22,4 +23,8 @@ body{
     border: 1px solid black;
     margin: 0;
     padding: 0px;
+}
+
+.buttons{
+    padding: 16px;
 }
