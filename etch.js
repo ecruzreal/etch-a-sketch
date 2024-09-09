@@ -12,17 +12,27 @@ function constructGrid(size=16){
     }
 }
 
+function getRandomColor(){
+    //Code to produce pastel colors using HSL colors from
+    // https://stackoverflow.com/questions/43193341/how-to-generate-random-pastel-or-brighter-color-in-javascript
+    return "hsl(" + 360 * Math.random() + ',' +
+            (25 + 80 * Math.random()) + '%,' + 
+            (70 + 10 * Math.random()) + '%)' 
+}
+
 constructGrid()
 
 const draw = document.querySelector('#draw')
 const erase = document.querySelector('#erase')
 const reset  = document.querySelector('#reset')
 const update_grid = document.querySelector('#grid-update')
+const color_picker = document.querySelector('#color-picker')
+const random_color = document.querySelector('#rainbow')
 
 draw.addEventListener('click', () => {
     const grid = document.querySelectorAll('.box')
     grid.forEach(box => {
-        box.addEventListener('mouseenter', () => box.style.backgroundColor = 'black')
+        box.addEventListener('mouseenter', () => box.style.backgroundColor = `${color_picker.value}`)
     });
 });
 
@@ -47,4 +57,18 @@ update_grid.addEventListener('click', () => {
     } else {
         alert('Only integers between 2 and 99 are supported.')
     }
+})
+
+color_picker.addEventListener('change', () => {
+    const grid = document.querySelectorAll('.box')
+    grid.forEach(box =>{ 
+        box.addEventListener('mouseenter', () => box.style.backgroundColor = `${color_picker.value}`)
+    })
+})
+
+random_color.addEventListener('click', () => {
+    const grid = document.querySelectorAll('.box')
+    grid.forEach(box => {
+        box.addEventListener('mouseenter', () => box.style.backgroundColor = getRandomColor())
+    })
 })

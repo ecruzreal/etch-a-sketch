@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
 }
 
@@ -32,4 +32,13 @@ body{
 #grid-update{
     padding: 8px;
     margin: 16px;
+}
+
+.lower-buttons{
+    display: flex;
+    gap: 16px;
+}
+
+#color-label{
+    padding: 8px;
 }
