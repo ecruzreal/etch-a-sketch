@@ -1,4 +1,7 @@
 const container  = document.querySelector('.container')
+let drawing = false
+let erasing = false
+let multi_color = false
 
 function constructGrid(size=16){
     container.innerHTML = '';
@@ -20,6 +23,17 @@ function getRandomColor(){
             (70 + 10 * Math.random()) + '%)' 
 }
 
+function handleDraw(event){
+    if (multi_color){
+        event.target.style.backgroundColor = getRandomColor()
+    } else if (erasing){
+        console.log('erasing')
+        event.target.style.backgroundColor = 'white'
+    } else {
+        event.target.style.backgroundColor = `${color_picker.value}`
+    }
+}
+
 constructGrid()
 
 const draw = document.querySelector('#draw')
@@ -28,25 +42,59 @@ const reset  = document.querySelector('#reset')
 const update_grid = document.querySelector('#grid-update')
 const color_picker = document.querySelector('#color-picker')
 const random_color = document.querySelector('#rainbow')
+const grid_toggle = document.querySelector('#show-grid')
 
+container.addEventListener('click', () => {
+    const grid = document.querySelectorAll('.box')
+    console.log('test')
+    if (drawing === false){
+        grid.forEach(box => {
+            box.addEventListener('mouseenter', handleDraw)
+            drawing  = true
+            console.log('active')
+        })
+    } else {
+        grid.forEach(box => {
+            box.removeEventListener('mouseenter', handleDraw)
+            drawing  = false
+            console.log('disabled')
+        })
+    }
+})
+
+/*
 draw.addEventListener('click', () => {
     const grid = document.querySelectorAll('.box')
     grid.forEach(box => {
         box.addEventListener('mouseenter', () => box.style.backgroundColor = `${color_picker.value}`)
     });
 });
+*/
 
 erase.addEventListener('click', () => {
     const grid = document.querySelectorAll('.box')
-    grid.forEach(box => {
-        box.addEventListener('mouseenter', () => box.style.backgroundColor = 'white')
-    })
+    erase.classList.toggle('active')
+    if (!erasing){
+        /*
+        grid.forEach(box => {
+            box.addEventListener('mouseenter', () => box.style.backgroundColor = 'white')
+        })
+        */
+        erasing = true
+    } else {
+        /*
+        grid.forEach(box => {
+            box.addEventListener('mouseenter', handleDraw)
+        })
+        */
+        erasing  = false
+    }
 })
 
 reset.addEventListener('click', () => {
     const grid = document.querySelectorAll('.box')
     grid.forEach(box => {
-        box.style.backgroundColor = 'white';
+        box.style.backgroundColor = 'transparent';
     })
 })
 
@@ -59,16 +107,44 @@ update_grid.addEventListener('click', () => {
     }
 })
 
+/*
 color_picker.addEventListener('change', () => {
     const grid = document.querySelectorAll('.box')
     grid.forEach(box =>{ 
         box.addEventListener('mouseenter', () => box.style.backgroundColor = `${color_picker.value}`)
     })
 })
+*/
 
 random_color.addEventListener('click', () => {
     const grid = document.querySelectorAll('.box')
+    random_color.classList.toggle('pressed')
+    /*
     grid.forEach(box => {
         box.addEventListener('mouseenter', () => box.style.backgroundColor = getRandomColor())
     })
+    */
+   if (!multi_color){
+     multi_color = true
+   } else {
+    multi_color = false
+   }
+})
+
+const outer = document.querySelector('.outer')
+grid_on = true
+grid_toggle.addEventListener('click', () => {
+    const grid = document.querySelectorAll('.box')
+    if (grid_on) { 
+        grid.forEach(box => {
+            box.style.border = 'solid 0px black'
+        })
+        grid_on = false
+    }
+    else{
+        grid.forEach(box => {
+            box.style.border = 'solid 1px black'
+        })
+        grid_on = true
+    }
 })

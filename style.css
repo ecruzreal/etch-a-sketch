@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-body{
+body{ 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,6 +41,12 @@ a{
     padding: 8px;
 }
 
+.outer{
+    width: 500px;
+    height: 500px;
+    border: solid 1px black;
+}
+
 .container{
     width: 500px;
     height: 500px;
@@ -61,7 +67,8 @@ a{
     padding: 16px;
 }
 
-#grid-update{
+#grid-update,
+#show-grid{
     padding: 8px;
     margin: 20px;
     background-color: dodgerblue;
@@ -69,6 +76,8 @@ a{
     border: 1px solid black;
     border-radius: 2px;
     font-size: large;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 .lower-buttons{
@@ -95,6 +104,26 @@ a{
     color: white;
     font-size: large;
     padding: 8px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#draw:active,
+#erase:active,
+#reset:active,
+#grid-update:active,
+#show-grid:active{
+    background-color: darkorchid;
+    top: 2px;
+    left: 1px;
+    box-shadow: none;
+}
+
+#erase.active{
+    background-color: darkorchid;
+    top: 2px;
+    left: 1px;
+    box-shadow: none;
 }
 
 #rainbow{
@@ -107,6 +136,12 @@ a{
 
 /*Hover rainbow effect from https://codepen.io/althi/pen/eKdmaa*/
 #rainbow:hover{
+    background-color: white;
+    background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+    animation:slidebg 5s linear infinite;
+}
+
+#rainbow.pressed{
     background-color: white;
     background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
     animation:slidebg 5s linear infinite;
